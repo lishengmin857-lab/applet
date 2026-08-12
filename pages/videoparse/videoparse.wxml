@@ -1,0 +1,144 @@
+<view class="container">
+  <!-- Brand Banner -->
+  <view class="brand-banner">
+    <view class="brand-left">
+      <view class="brand-logo-squircle">🎬</view>
+      <view class="title-container">
+        <text class="brand-title serif-title">视频解析</text>
+        <text class="brand-subtitle">无水印高清视频提取</text>
+      </view>
+    </view>
+    
+    <button class="guide-btn" bindtap="onShowGuide">
+      支持平台
+      <view class="icon-btn-question"></view>
+    </button>
+  </view>
+
+  <!-- URL Input Glass Card -->
+  <view class="glass-card input-card">
+    <textarea
+      class="textarea-input"
+      placeholder-class="textarea-placeholder"
+      placeholder="在此粘贴抖音、快手、B站、YouTube、小红书等视频链接..."
+      maxlength="1000"
+      bindinput="onUrlInput"
+      value="{{inputUrl}}"
+    ></textarea>
+    
+    <view class="input-card-footer">
+      <button class="paste-pill-btn" bindtap="onPaste">
+        <view class="icon-btn-paste"></view>
+        粘贴链接
+      </button>
+      <button class="clear-pill-btn" bindtap="onClearUrl" wx:if="{{inputUrl}}">
+        清空
+      </button>
+    </view>
+  </view>
+
+  <!-- Platform Tags -->
+  <view class="platform-tags-container">
+    <view class="platform-tag" wx:for="{{platforms}}" wx:key="name">
+      <text class="platform-icon">{{item.icon}}</text>
+      <text class="platform-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- Main Parse Button -->
+  <button class="action-submit-btn {{loading ? 'disabled' : ''}}" bindtap="onParse" disabled="{{loading}}">
+    <view class="sparkle-icon" wx:if="{{!loading}}"></view>
+    <text>{{loading ? '解析中...' : '一键提取视频'}}</text>
+  </button>
+
+  <!-- Loading Progress Bar -->
+  <view class="progress-bar-container" wx:if="{{loading}}">
+    <view class="progress-track">
+      <view class="progress-fill" style="width: {{parseProgress}}%"></view>
+    </view>
+    <text class="progress-text">{{parseProgress}}%</text>
+  </view>
+
+  <!-- Parse Result Section -->
+  <view class="result-section" wx:if="{{videoInfo}}">
+    <view class="glass-card result-card">
+      <!-- Video Info Card -->
+      <view class="video-info-box">
+        <image
+          class="video-thumbnail"
+          src="{{videoInfo.thumbnail}}"
+          mode="aspectFill"
+          wx:if="{{videoInfo.thumbnail}}"
+        />
+        <view class="video-details">
+          <text class="video-title">{{videoInfo.title}}</text>
+          <text class="video-author" wx:if="{{videoInfo.uploader}}">👤 {{videoInfo.uploader}}</text>
+          <view class="video-badges">
+            <text class="badge-item" wx:if="{{durationStr}}">⏱ {{durationStr}}</text>
+            <text class="badge-item platform-badge">{{platformName}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- Formats Selection -->
+      <view class="formats-box" wx:if="{{videoInfo.formats && videoInfo.formats.length > 0}}">
+        <text class="formats-title">选择下载格式 ({{videoInfo.formats.length}}个可用)</text>
+        <view class="formats-list">
+          <view
+            class="format-row {{selectedFormatId === item.format_id ? 'active' : ''}}"
+            wx:for="{{videoInfo.formats}}"
+            wx:key="format_id"
+            bindtap="onSelectFormat"
+            data-id="{{item.format_id}}"
+            data-url="{{item.url}}"
+          >
+            <view class="format-info">
+              <view class="radio-dot {{selectedFormatId === item.format_id ? 'checked' : ''}}"></view>
+              <text class="format-quality">{{item.format_note || item.resolution || '默认高清'}}</text>
+              <text class="format-ext">{{item.ext || 'mp4'}}</text>
+            </view>
+            <text class="format-filesize">{{item.filesize ? formatFileSize(item.filesize) : '未知大小'}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- Action Buttons -->
+      <view class="result-actions">
+        <button class="result-btn download-btn" bindtap="onSaveToAlbum">
+          📥 保存到手机相册
+        </button>
+        <button class="result-btn copy-btn" bindtap="onCopyUrl">
+          📋 复制视频链接
+        </button>
+      </view>
+
+      <!-- Warm Notice -->
+      <view class="warm-notice">
+        <text class="notice-text">💡 提示：点击“保存到手机相册”即可一键将无水印视频直接存入手机系统相册。</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Empty State Guide -->
+  <view class="empty-guide-card glass-card" wx:if="{{!videoInfo && !loading}}">
+    <text class="empty-icon">💡</text>
+    <text class="empty-title">简单 3 步轻松下载视频</text>
+    <view class="steps-list">
+      <view class="step-item">
+        <text class="step-num">1</text>
+        <text class="step-text">打开抖音/快手/B站，复制作品分享链接</text>
+      </view>
+      <view class="step-item">
+        <text class="step-num">2</text>
+        <text class="step-text">在此粘贴链接并点击“一键提取视频”</text>
+      </view>
+      <view class="step-item">
+        <text class="step-num">3</text>
+        <text class="step-text">复制解析后的无水印直链在浏览器中打开下载</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Shared Bottom TabBar -->
+  <include src="../../templates/tabbar.wxml" />
+</view>

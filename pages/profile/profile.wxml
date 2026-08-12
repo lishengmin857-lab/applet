@@ -1,0 +1,73 @@
+<view class="container">
+  <!-- User Profile Card -->
+  <view class="user-profile-card glass-card">
+    <view class="profile-avatar">
+      <view class="icon-avatar"></view>
+    </view>
+    <view class="profile-info">
+      <view class="profile-name-row">
+        <text class="profile-username">润色体验官</text>
+        <text class="vip-tag {{isVip ? 'active' : ''}}" bindtap="toggleVip">{{isVip ? 'VIP会员' : '免费会员'}}</text>
+      </view>
+      <text class="profile-uid">ID: 88294021</text>
+    </view>
+  </view>
+
+  <!-- Stats Grid -->
+  <view class="stats-grid">
+    <view class="stat-card glass-card">
+      <text class="stat-value">{{isVip ? '∞' : dailyRemainCount}}</text>
+      <text class="stat-title">今日剩余额度</text>
+    </view>
+    <view class="stat-card glass-card">
+      <text class="stat-value">{{totalGenerateCount}}</text>
+      <text class="stat-title">累计润色次数</text>
+    </view>
+  </view>
+
+  <!-- Settings List -->
+  <view class="settings-list">
+    <!-- VIP Toggle Card -->
+    <view class="setting-item" bindtap="toggleVip">
+      <view class="setting-item-left">
+        <view class="icon-setting icon-vip"></view>
+        <text>{{isVip ? '已尊享无限生成特权' : '开通黄金VIP会员'}}</text>
+      </view>
+      <text class="item-action-text {{isVip ? 'vip-active' : ''}}">{{isVip ? '已开启' : '去开通 ›'}}</text>
+    </view>
+
+    <!-- Share Button -->
+    <button class="setting-item-btn-wrapper" open-type="share">
+      <view class="setting-item">
+        <view class="setting-item-left">
+          <view class="icon-setting icon-share"></view>
+          <text>分享给好友</text>
+        </view>
+        <text class="item-arrow">›</text>
+      </view>
+    </button>
+
+    <!-- User Guide -->
+    <view class="setting-item" bindtap="showGuide">
+      <view class="setting-item-left">
+        <view class="icon-setting icon-guide"></view>
+        <text>使用指南</text>
+      </view>
+      <text class="item-arrow">›</text>
+    </view>
+
+    <!-- Customer Service Button -->
+    <button class="setting-item-btn-wrapper" open-type="contact">
+      <view class="setting-item">
+        <view class="setting-item-left">
+          <view class="icon-setting icon-contact"></view>
+          <text>联系客服</text>
+        </view>
+        <text class="item-arrow">›</text>
+      </view>
+    </button>
+  </view>
+
+  <!-- Include tab bar template -->
+  <include src="../../templates/tabbar.wxml" />
+</view>

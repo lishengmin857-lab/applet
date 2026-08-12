@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文案润色 - Web Simulator</title>
+  <!-- Google Fonts for premium serif and clean sans typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="desktop-container">
+    <!-- Desktop Left: Info Panel -->
+    <div class="info-panel">
+      <div class="info-header">
+        <div class="logo-text">Premium Preview</div>
+        <span class="badge">Glassmorphism</span>
+      </div>
+      <h1>智能文案润色</h1>
+      <p>优雅的极简毛玻璃微拟物设计。您可以在右侧的手机框架中体验文案润色生成、历史记录以及个人中心的多页面交互流程。</p>
+      
+      <div class="features-list">
+        <div class="feature-item">
+          <div class="feat-icon">💎</div>
+          <div class="feat-desc">
+            <strong>Frosted Glass 毛玻璃拟物</strong>
+            <span>采用背景模糊、渐变光边框、超软投影等技术，打造质感极其高级的数字界面。</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feat-icon">✨</div>
+          <div class="feat-desc">
+            <strong>缎面金属质感按钮</strong>
+            <span>纯 CSS 渲染的香槟金缎面拉丝金属渐变按钮，辅以精美的微发光效果。</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feat-icon">📱</div>
+          <div class="feat-desc">
+            <strong>多页面完整体验</strong>
+            <span>支持底部导航栏切换：首屏润色、历史记录、个人中心。全部逻辑已同步写好！</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dev-controls">
+        <h3>开发调试工具</h3>
+        <button id="btn-toggle-vip" class="control-btn">切换 VIP 身份 (当前: <span id="vip-status-label">普通用户</span>)</button>
+        <button id="btn-reset-storage" class="control-btn">清除本地数据</button>
+      </div>
+
+      <div class="footer-note">
+        小程序源码已更新同步到 <code>d:\applet\</code>。支持真机调试和微信开发者工具直接运行。
+      </div>
+    </div>
+
+    <!-- Desktop Right: Phone Frame Simulator -->
+    <div class="phone-frame">
+      <!-- Dynamic Island / Notch -->
+      <div class="dynamic-island"></div>
+      
+      <!-- Phone Status Bar -->
+      <div class="status-bar">
+        <div class="status-time">9:41</div>
+        <div class="status-icons">
+          <!-- Signal Icon -->
+          <svg class="icon-signal" width="17" height="11" viewBox="0 0 17 11" fill="currentColor">
+            <rect x="0" y="8" width="3" height="3" rx="0.5" />
+            <rect x="4" y="6" width="3" height="5" rx="0.5" />
+            <rect x="8" y="4" width="3" height="7" rx="0.5" />
+            <rect x="12" y="1.5" width="3" height="9.5" rx="0.5" />
+          </svg>
+          <!-- Wifi Icon -->
+          <svg class="icon-wifi" width="15" height="11" viewBox="0 0 15 11" fill="currentColor">
+            <path d="M7.5 11C8.2 11 8.8 10.4 8.8 9.8C8.8 9.1 8.2 8.5 7.5 8.5C6.8 8.5 6.2 9.1 6.2 9.8C6.2 10.4 6.8 11 7.5 11Z"/>
+            <path d="M7.5 5.5C9.2 5.5 10.8 6.2 12 7.3C12.3 7.6 12.8 7.6 13.1 7.3C13.4 7 13.4 6.5 13.1 6.2C11.5 4.7 9.5 4 7.5 4C5.5 4 3.5 4.7 2 6.2C1.7 6.5 1.7 7 2 7.3C2.3 7.6 2.8 7.6 3.1 7.3C4.3 6.2 5.9 5.5 7.5 5.5Z"/>
+            <path d="M7.5 1C10.5 1 13.3 2.1 15.3 4C15.6 4.3 16.1 4.3 16.4 4C16.7 3.7 16.7 3.2 16.4 2.9C13.9 0.6 10.7 -0.4 7.5 0.1C4.3 -0.4 1.1 0.6 -1.4 2.9C-1.7 3.2 -1.7 3.7 -1.4 4C-1.1 4.3 -0.6 4.3 -0.3 4C1.7 2.1 4.5 1 7.5 1Z"/>
+          </svg>
+          <!-- Battery Icon -->
+          <div class="battery-container">
+            <div class="battery-level" style="width: 100%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App Header / Navigation Bar -->
+      <div class="app-header">
+        <div class="header-placeholder"></div>
+        <div class="header-title" id="nav-title">文案润色</div>
+        <div class="wechat-menu-btn">
+          <span class="dot-large"></span>
+          <span class="divider"></span>
+          <span class="circle-ring"></span>
+        </div>
+      </div>
+
+      <!-- Phone Screen Scrollable Content -->
+      <div class="phone-screen">
+        
+        <!-- PAGE 1: GENERATE / HOME -->
+        <div id="page-home" class="page-content active">
+          <!-- Top Brand Banner -->
+          <div class="brand-banner">
+            <div class="brand-left">
+              <!-- Feather Logo Squircle -->
+              <div class="brand-logo-squircle">🪶</div>
+              <div class="title-container">
+                <h2>文案润色</h2>
+                <p class="brand-subtitle">让文字更有力量</p>
+              </div>
+            </div>
+            
+            <button id="btn-guide" class="guide-btn">
+              使用指南
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Glass Input Card -->
+          <div class="glass-card input-card">
+            <textarea id="textarea-input" placeholder="请输入或粘贴你想要润色的文案..." maxlength="1000"></textarea>
+            
+            <div class="input-card-footer">
+              <button id="btn-paste" class="paste-pill-btn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                </svg>
+                粘贴文本
+              </button>
+              
+              <span class="char-counter"><span id="input-length">0</span>/1000</span>
+            </div>
+          </div>
+
+          <!-- Style Selection Area -->
+          <div class="style-section">
+            <div class="style-header-container">
+              <h3 class="style-title">选择风格</h3>
+              <div class="ai-recommend">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                </svg>
+                <span>AI 智能推荐</span>
+              </div>
+            </div>
+
+            <!-- Skeuomorphic Cards Row -->
+            <div class="style-cards-row">
+              <!-- Card 1: 幽默 -->
+              <div class="style-card card-beige" data-style="funny">
+                <div class="card-icon-circle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A68D79" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                  </svg>
+                </div>
+                <h4>幽默</h4>
+                <p>轻松诙谐，吸引眼球</p>
+              </div>
+
+              <!-- Card 2: 真诚 (Active by default) -->
+              <div class="style-card card-green active" data-style="sincere">
+                <div class="card-icon-circle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#79A68D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </div>
+                <h4>真诚</h4>
+                <p>走心自然，打动人心</p>
+              </div>
+
+              <!-- Card 3: 专业 -->
+              <div class="style-card card-purple" data-style="professional">
+                <div class="card-icon-circle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8D79A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                </div>
+                <h4>专业</h4>
+                <p>严谨专业，增强信任</p>
+              </div>
+
+              <!-- Card 4: 诗词 -->
+              <div class="style-card card-teal" data-style="poetry">
+                <div class="card-icon-circle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#799E9E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                  </svg>
+                </div>
+                <h4>诗词</h4>
+                <p>古风雅韵，意境深远</p>
+              </div>
+
+              <!-- Card 5: 唯美 -->
+              <div class="style-card card-pink" data-style="aesthetic">
+                <div class="card-icon-circle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#CF8C8C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                </div>
+                <h4>唯美</h4>
+                <p>温柔治愈，画面感强</p>
+              </div>
+
+              <!-- Card 6: 浪漫 -->
+              <div class="style-card card-orange" data-style="romantic">
+                <div class="card-icon-circle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DB9774" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+                </div>
+                <h4>浪漫</h4>
+                <p>字句温柔，浪漫心动</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Generate Button -->
+          <div class="generate-btn-container">
+            <button id="btn-generate" class="satin-gold-btn">
+              <span class="star-icon">✦</span>
+              开始润色
+            </button>
+          </div>
+        </div>
+
+        <!-- PAGE 2: RECORDS -->
+        <div id="page-records" class="page-content">
+          <div class="page-header">
+            <h2>润色记录</h2>
+            <p>这里记录了您最近润色生成的全部文案</p>
+          </div>
+          
+          <div id="records-list" class="records-container">
+            <!-- Dynamic Records Card list -->
+          </div>
+          
+          <div id="records-empty" class="empty-state">
+            <div class="empty-icon-feather"></div>
+            <p>暂无润色记录</p>
+            <button class="empty-action-btn" onclick="switchTab('home')">开始润色</button>
+          </div>
+        </div>
+
+        <!-- PAGE 3: PROFILE -->
+        <div id="page-profile" class="page-content">
+          <!-- User Profile Box -->
+          <div class="glass-card user-profile-card">
+            <div class="profile-avatar">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#A69279" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <div class="profile-info">
+              <div class="profile-name-row">
+                <h3>微信用户</h3>
+                <span id="vip-badge" class="vip-tag">PRO</span>
+              </div>
+              <p>账户类型：<span id="vip-status-text">普通用户</span></p>
+            </div>
+          </div>
+
+          <!-- Stats summary -->
+          <div class="stats-grid">
+            <div class="glass-card stat-card">
+              <span class="stat-value" id="quota-remain">10</span>
+              <span class="stat-title">剩余次数</span>
+            </div>
+            <div class="glass-card stat-card">
+              <span class="stat-value" id="stat-total">0</span>
+              <span class="stat-title">累计润色</span>
+            </div>
+          </div>
+
+          <!-- Menus List -->
+          <div class="settings-list">
+            <div class="setting-item" id="menu-vip">
+              <span>👑 会员特权</span>
+              <span class="item-arrow">›</span>
+            </div>
+            <div class="setting-item" id="menu-share">
+              <span>🎁 邀请好友（得额外次数）</span>
+              <span class="item-arrow">›</span>
+            </div>
+            <div class="setting-item" id="menu-guide-profile">
+              <span>📖 使用指南</span>
+              <span class="item-arrow">›</span>
+            </div>
+            <div class="setting-item" id="menu-support">
+              <span>💬 联系客服</span>
+              <span class="item-arrow">›</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- App Bottom Navigation Tab Bar -->
+      <div class="tab-bar">
+        <!-- Tab 1: Generate -->
+        <div class="tab-item active" data-tab="home">
+          <svg class="tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+            <path d="M2 2l7.5 1.5"></path>
+            <path d="M14 14l3-3"></path>
+          </svg>
+          <span class="tab-text">润色</span>
+        </div>
+
+        <!-- Tab 2: Video Parse -->
+        <div class="tab-item" data-tab="videoparse">
+          <svg class="tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+          </svg>
+          <span class="tab-text">视频下载</span>
+        </div>
+
+        <!-- Tab 3: Records -->
+        <div class="tab-item" data-tab="records">
+          <svg class="tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+          </svg>
+          <span class="tab-text">记录</span>
+        </div>
+
+        <!-- Tab 3: Profile -->
+        <div class="tab-item" data-tab="profile">
+          <svg class="tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span class="tab-text">我的</span>
+        </div>
+      </div>
+
+      <!-- Toast Element -->
+      <div id="toast" class="toast">复制成功</div>
+
+      <!-- Loading Modal -->
+      <div id="loading-modal" class="loading-overlay">
+        <div class="loading-card glass-modal">
+          <div class="loading-spinner"></div>
+          <div class="loading-text">文案润色中...</div>
+        </div>
+      </div>
+
+      <!-- Result Modal ( Frosted glass design ) -->
+      <div id="result-modal" class="modal-overlay">
+        <div class="result-modal-card glass-modal">
+          <div class="modal-header">
+            <h3>✨ 润色结果</h3>
+            <span id="result-tag" class="result-badge-style">真诚</span>
+          </div>
+          
+          <div class="modal-body-content">
+            <div id="result-content-text" class="result-text-area">这里是生成的文案...</div>
+          </div>
+          
+          <div class="modal-footer-buttons">
+            <button id="modal-btn-favorite" class="modal-action-btn fav-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <span>收藏</span>
+            </button>
+
+            <button id="modal-btn-copy" class="modal-action-btn copy-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              </svg>
+              一键复制
+            </button>
+          </div>
+          
+          <div class="modal-close-row">
+            <button id="modal-btn-regenerate" class="modal-secondary-btn">重新生成</button>
+            <button id="modal-btn-close" class="modal-secondary-btn close-x">关闭</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Dialog Overlay -->
+  <div id="info-dialog" class="dialog-overlay">
+    <div class="dialog-card glass-modal">
+      <h3 id="dialog-title">使用说明</h3>
+      <div id="dialog-body" class="dialog-body">内容...</div>
+      <button id="dialog-btn-close" class="dialog-close-btn">确定</button>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

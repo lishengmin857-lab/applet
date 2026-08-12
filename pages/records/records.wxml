@@ -1,0 +1,37 @@
+<view class="container">
+  <!-- Page Header -->
+  <view class="page-header">
+    <view class="title-md">润色记录</view>
+    <text class="text-sm">这里记录了您最近润色生成的全部文案</text>
+  </view>
+
+  <!-- Records List -->
+  <view class="records-container" wx:if="{{records.length > 0}}">
+    <view class="record-card glass-card" wx:for="{{records}}" wx:key="id">
+      <view class="record-card-header">
+        <text class="record-style-tag tag-{{item.style}}">{{stylesConfig[item.style].name}}风格</text>
+        <text class="record-time">{{item.timeFormatted}}</text>
+      </view>
+      
+      <view class="record-content-box">
+        <view class="record-orig-text">原文: {{item.inputText}}</view>
+        <text class="record-gen-text" selectable="true">{{item.resultText}}</text>
+      </view>
+      
+      <view class="record-actions">
+        <button class="record-action-btn btn-del" bindtap="onDelete" data-id="{{item.id}}">删除</button>
+        <button class="record-action-btn btn-copy" bindtap="onCopy" data-id="{{item.id}}">复制</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- Empty State -->
+  <view class="empty-state" wx:else>
+    <view class="empty-icon-feather"></view>
+    <text class="empty-text">暂无润色记录</text>
+    <button class="empty-action-btn" bindtap="goHome">开始润色</button>
+  </view>
+
+  <!-- Include tab bar template -->
+  <include src="../../templates/tabbar.wxml" />
+</view>

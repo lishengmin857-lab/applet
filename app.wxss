@@ -1,0 +1,189 @@
+/** Global Theme and Elegant Glassmorphic Design Tokens **/
+page {
+  background-color: #F1EBE3;
+  background-image: radial-gradient(circle at 50% -8%, #FBF8F4 0%, #F7F3EE 43%, #F1EBE3 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, sans-serif;
+  color: #756A60;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 0;
+  position: relative;
+}
+
+page::before {
+  content: '';
+  position: fixed;
+  width: 520rpx;
+  height: 520rpx;
+  left: -160rpx;
+  top: 420rpx;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  filter: blur(128px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+page::after {
+  content: '';
+  position: fixed;
+  width: 480rpx;
+  height: 480rpx;
+  left: 604rpx;
+  top: 720rpx;
+  background: rgba(234, 216, 202, 0.3);
+  border-radius: 50%;
+  filter: blur(128px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Base resets */
+view, text, scroll-view, textarea, button {
+  box-sizing: border-box;
+}
+
+/* Elegant Frosted Glass Container */
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2rpx solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8rpx 32rpx 0 rgba(166, 146, 121, 0.1);
+  border-radius: 40rpx;
+  padding: 40rpx;
+  position: relative;
+}
+
+/* Flex utilities */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+/* Typography */
+.serif-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 800;
+  color: #3D3025;
+}
+
+.title-md {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #3D3025;
+}
+
+.text-sm {
+  font-size: 24rpx;
+  color: #A3968A;
+}
+
+.text-xs {
+  font-size: 20rpx;
+  color: #C3B5A7;
+}
+
+/* Custom Bottom Tab Bar Shared Style */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 146rpx;
+  background-color: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1rpx solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 9999;
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #B9B0A8;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #B8947A;
+}
+
+.tab-icon {
+  width: 44rpx;
+  height: 44rpx;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 4rpx;
+}
+
+.tab-text {
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 24rpx;
+  width: 26rpx;
+  height: 6rpx;
+  background-color: #D6AD91;
+  border-radius: 4rpx;
+}
+
+/* Tab icons background SVGs */
+.icon-tab-home {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B9B0A8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19l7-7 3 3-7 7-3-3z'/%3E%3Cpath d='M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z'/%3E%3Cpath d='M2 2l7.5 1.5'/%3E%3Cpath d='M14 14l3-3'/%3E%3C/svg%3E");
+}
+.tab-item.active .icon-tab-home {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B8947A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19l7-7 3 3-7 7-3-3z'/%3E%3Cpath d='M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z'/%3E%3Cpath d='M2 2l7.5 1.5'/%3E%3Cpath d='M14 14l3-3'/%3E%3C/svg%3E");
+}
+
+.icon-tab-video {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B9B0A8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='23 7 16 12 23 17 23 7'/%3E%3Crect x='1' y='5' width='15' height='14' rx='2' ry='2'/%3E%3C/svg%3E");
+}
+.tab-item.active .icon-tab-video {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B8947A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='23 7 16 12 23 17 23 7'/%3E%3Crect x='1' y='5' width='15' height='14' rx='2' ry='2'/%3E%3C/svg%3E");
+}
+
+.icon-tab-records {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B9B0A8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3C/svg%3E");
+}
+.tab-item.active .icon-tab-records {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B8947A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3C/svg%3E");
+}
+
+.icon-tab-profile {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B9B0A8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+}
+.tab-item.active .icon-tab-profile {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B8947A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+}

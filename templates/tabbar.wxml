@@ -1,0 +1,18 @@
+<view class="tab-bar">
+  <view class="tab-item {{activeTab === 'home' ? 'active' : ''}}" bindtap="switchTab" data-tab="home">
+    <view class="tab-icon icon-tab-home"></view>
+    <text class="tab-text">润色</text>
+  </view>
+  <view class="tab-item {{activeTab === 'videoparse' ? 'active' : ''}}" bindtap="switchTab" data-tab="videoparse">
+    <view class="tab-icon icon-tab-video"></view>
+    <text class="tab-text">视频下载</text>
+  </view>
+  <!-- <view class="tab-item {{activeTab === 'records' ? 'active' : ''}}" bindtap="switchTab" data-tab="records">
+    <view class="tab-icon icon-tab-records"></view>
+    <text class="tab-text">记录</text>
+  </view> -->
+  <view class="tab-item {{activeTab === 'profile' ? 'active' : ''}}" bindtap="switchTab" data-tab="profile">
+    <view class="tab-icon icon-tab-profile"></view>
+    <text class="tab-text">我的</text>
+  </view>
+</view>

@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/videoparse/videoparse",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F5F0EA",
+    "navigationBarTitleText": "文案润色",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F5F0EA"
+  },
+  "sitemapLocation": "sitemap.json"
+}
