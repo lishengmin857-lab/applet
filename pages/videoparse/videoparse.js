@@ -1,5 +1,6 @@
 // Video Parse Page Controller
 const app = getApp();
+const DOWNLOAD_TIMEOUT_MS = 10 * 60 * 1000;
 
 const PLATFORMS = [
   { name: '抖音', icon: '🎵' },
@@ -295,6 +296,7 @@ Page({
     const downloadTask = wx.downloadFile({
       url: downloadUrl,
       filePath: targetFilePath,
+      timeout: DOWNLOAD_TIMEOUT_MS,
       success(res) {
         const downloadedFilePath = res.filePath || res.tempFilePath || targetFilePath;
         if ((res.statusCode === 200 || res.statusCode === 206) && downloadedFilePath) {
@@ -446,8 +448,9 @@ Page({
   switchTab(e) {
     const tab = e.currentTarget.dataset.tab;
     const routes = {
-      home: '/pages/index/index',
+      home: '/pages/home/home',
       videoparse: '/pages/videoparse/videoparse',
+      polish: '/pages/polish/polish',
       records: '/pages/records/records',
       profile: '/pages/profile/profile'
     };

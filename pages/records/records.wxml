@@ -15,7 +15,7 @@
       
       <view class="record-content-box">
         <view class="record-orig-text">原文: {{item.inputText}}</view>
-        <text class="record-gen-text" selectable="true">{{item.resultText}}</text>
+        <text class="record-gen-text" user-select="true">{{item.resultText}}</text>
       </view>
       
       <view class="record-actions">

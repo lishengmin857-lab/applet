@@ -198,3 +198,13 @@
 .setting-item-btn-wrapper::after {
   display: none;
 }
+
+.version-info {
+  display: flex;
+  justify-content: center;
+  margin-top: 38rpx;
+  padding-bottom: 140rpx;
+  color: #B5ADA6;
+  font-size: 22rpx;
+  line-height: 1.5;
+}

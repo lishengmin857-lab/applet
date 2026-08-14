@@ -34,6 +34,8 @@ App({
 
   globalData: {
     userInfo: null,
+    appVersion: '1.0.1',
+    buildDate: '2026.08.12',
     // apiBaseUrl: 'http://127.0.0.1:3100'
     apiBaseUrl: 'https://xiezuozhushou.site'
   }

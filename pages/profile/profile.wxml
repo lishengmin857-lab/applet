@@ -68,6 +68,10 @@
     </button>
   </view>
 
+  <view class="version-info">
+    <text>版本 {{appVersion}} · {{buildDate}}</text>
+  </view>
+
   <!-- Include tab bar template -->
   <include src="../../templates/tabbar.wxml" />
 </view>

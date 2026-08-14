@@ -1,10 +1,14 @@
 // Profile page JS controller
+const app = getApp();
+
 Page({
   data: {
     isVip: false,
     dailyRemainCount: 10,
     totalGenerateCount: 0,
-    activeTab: 'profile'
+    activeTab: 'profile',
+    appVersion: app.globalData.appVersion,
+    buildDate: app.globalData.buildDate
   },
 
   onShow() {
@@ -53,9 +57,8 @@ Page({
 
   onShareAppMessage() {
     return {
-      title: '发现一个超级好用的AI文案润色小程序，一键让文字更有力量！',
-      path: '/pages/index/index',
-      imageUrl: '' // Optional default screenshot
+      title: '发现一个超好用的文案灵感与排版润色工具，让文字更有力量！',
+      path: '/pages/home/home'
     };
   },
 
@@ -63,8 +66,9 @@ Page({
   switchTab(e) {
     const tab = e.currentTarget.dataset.tab;
     const routes = {
-      home: '/pages/index/index',
+      home: '/pages/home/home',
       videoparse: '/pages/videoparse/videoparse',
+      polish: '/pages/polish/polish',
       records: '/pages/records/records',
       profile: '/pages/profile/profile'
     };

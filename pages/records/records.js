@@ -89,7 +89,7 @@ Page({
 
   goHome() {
     wx.redirectTo({
-      url: '/pages/index/index'
+      url: '/pages/home/home'
     });
   },
 
@@ -97,8 +97,9 @@ Page({
   switchTab(e) {
     const tab = e.currentTarget.dataset.tab;
     const routes = {
-      home: '/pages/index/index',
+      home: '/pages/home/home',
       videoparse: '/pages/videoparse/videoparse',
+      polish: '/pages/polish/polish',
       records: '/pages/records/records',
       profile: '/pages/profile/profile'
     };

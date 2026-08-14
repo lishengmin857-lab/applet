@@ -1,0 +1,258 @@
+<view class="container">
+  <!-- Brand Top Banner -->
+  <view class="brand-banner">
+    <view class="brand-left">
+      <view class="brand-logo-squircle">📖</view>
+      <view class="title-container">
+        <text class="brand-title serif-title">文案灵感库</text>
+        <text class="brand-subtitle">精选爆款文案 · 实用排版工具</text>
+      </view>
+    </view>
+    
+    <button class="tool-quick-btn" bindtap="openToolModal" data-tool="clean">
+      <text class="tool-btn-icon">🧰</text>
+      工具箱
+    </button>
+  </view>
+
+  <!-- Daily Inspiration Glass Card -->
+  <view class="daily-card glass-card">
+    <view class="daily-header">
+      <view class="daily-tag">
+        <text class="sparkle-symbol">✨</text>
+        <text class="daily-tag-text">每日一言 · {{currentDateStr}}</text>
+      </view>
+      <view class="refresh-quote-btn" bindtap="onRefreshQuote">
+        <text class="icon-refresh">🔄</text>
+        <text>换一换</text>
+      </view>
+    </view>
+
+    <view class="daily-content-box">
+      <text class="quote-mark left">“</text>
+      <text class="daily-quote-text" user-select="true">{{dailyQuote.text}}</text>
+      <text class="quote-mark right">”</text>
+      <view class="daily-author">— {{dailyQuote.author}}</view>
+    </view>
+
+    <view class="daily-card-footer">
+      <button class="card-action-btn secondary" bindtap="onCopyDailyQuote">
+        <text class="btn-icon">📋</text>
+        复制金句
+      </button>
+      <button class="card-action-btn primary" bindtap="onGoToPolish" data-text="{{dailyQuote.text}}">
+        <text class="btn-icon">✦</text>
+        去润色改写
+      </button>
+    </view>
+  </view>
+
+  <!-- Quick Creator Tools Bar -->
+  <view class="section-container">
+    <view class="section-title-row">
+      <text class="section-title">创作小工具</text>
+      <text class="section-tip">提高排版与自媒体发布效率</text>
+    </view>
+
+    <view class="tool-cards-grid">
+      <!-- Tool 1: 排版清洗 -->
+      <view class="tool-item-card glass-card" bindtap="openToolModal" data-tool="clean">
+        <view class="tool-icon-bg tool-icon-clean">✍️</view>
+        <view class="tool-info">
+          <text class="tool-name">排版清洗</text>
+          <text class="tool-desc">去空行·字数统计</text>
+        </view>
+      </view>
+
+      <!-- Tool 2: 花样字体 -->
+      <view class="tool-item-card glass-card" bindtap="openToolModal" data-tool="font">
+        <view class="tool-icon-bg tool-icon-font">🔠</view>
+        <view class="tool-info">
+          <text class="tool-name">花样字库</text>
+          <text class="tool-desc">花藤字符·吸睛排版</text>
+        </view>
+      </view>
+
+      <!-- Tool 3: 违禁词自检 -->
+      <view class="tool-item-card glass-card" bindtap="openToolModal" data-tool="check">
+        <view class="tool-icon-bg tool-icon-check">🔍</view>
+        <view class="tool-info">
+          <text class="tool-name">文案自检</text>
+          <text class="tool-desc">极限词排查辅助</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Search and Categories Section -->
+  <view class="section-container">
+    <view class="section-title-row">
+      <text class="section-title">精选文案合集</text>
+      <text class="section-count">{{filteredQuotes.length}} 条灵感</text>
+    </view>
+
+    <!-- Search Input -->
+    <view class="search-input-wrapper glass-card">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="搜索文案关键词，如朋友圈、早安、穿搭..."
+        placeholder-class="search-placeholder"
+        bindinput="onSearchInput"
+        value="{{searchKeyword}}"
+      />
+      <text class="clear-search-btn" wx:if="{{searchKeyword}}" bindtap="onClearSearch">✕</text>
+    </view>
+
+    <!-- Category Pills Horizontal Scroll -->
+    <scroll-view class="category-scroll" scroll-x="true" enable-flex="true" show-scrollbar="false">
+      <view
+        wx:for="{{categories}}"
+        wx:key="id"
+        class="category-pill {{activeCategory === item.id ? 'active' : ''}}"
+        bindtap="onSelectCategory"
+        data-id="{{item.id}}"
+      >
+        <text class="category-name">{{item.name}}</text>
+      </view>
+    </scroll-view>
+
+    <!-- Quotes Stream List -->
+    <view class="quotes-stream-list">
+      <view
+        class="quote-item-card glass-card"
+        wx:for="{{filteredQuotes}}"
+        wx:key="id"
+      >
+        <view class="quote-card-header">
+          <text class="quote-tag-badge">{{item.tag}}</text>
+          <text class="quote-char-length">{{item.content.length}} 字</text>
+        </view>
+
+        <view class="quote-card-body">
+          <text class="quote-body-text" user-select="true">{{item.content}}</text>
+        </view>
+
+        <view class="quote-card-footer">
+          <text class="quote-source-author">🏷️ {{item.author}}</text>
+          
+          <view class="quote-btn-group">
+            <button class="quote-action-btn copy-btn" bindtap="onCopyText" data-text="{{item.content}}">
+              复制
+            </button>
+            <button class="quote-action-btn polish-btn" bindtap="onGoToPolish" data-text="{{item.content}}">
+              ✨ 润色
+            </button>
+          </view>
+        </view>
+      </view>
+
+      <!-- Empty State -->
+      <view class="empty-quote-state" wx:if="{{filteredQuotes.length === 0}}">
+        <text class="empty-emoji">🍂</text>
+        <text class="empty-text">未找到相关灵感文案，换个关键词试试吧</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Quick Tool Modal -->
+  <view class="modal-overlay" wx:if="{{showToolModal}}">
+    <view class="tool-modal-card glass-modal">
+      <view class="tool-modal-header">
+        <view class="tool-tab-switch">
+          <view
+            class="tool-tab-btn {{activeToolType === 'clean' ? 'active' : ''}}"
+            bindtap="switchToolTab"
+            data-tool="clean"
+          >排版清洗</view>
+          <view
+            class="tool-tab-btn {{activeToolType === 'font' ? 'active' : ''}}"
+            bindtap="switchToolTab"
+            data-tool="font"
+          >花样字库</view>
+          <view
+            class="tool-tab-btn {{activeToolType === 'check' ? 'active' : ''}}"
+            bindtap="switchToolTab"
+            data-tool="check"
+          >违禁词自检</view>
+        </view>
+        <view class="tool-close-btn" bindtap="closeToolModal">✕</view>
+      </view>
+
+      <view class="tool-modal-body">
+        <!-- Input Textarea -->
+        <view class="tool-input-box">
+          <textarea
+            class="tool-textarea"
+            placeholder="请输入或粘贴需要处理的文案..."
+            placeholder-class="textarea-placeholder"
+            maxlength="1000"
+            bindinput="onToolInput"
+            value="{{toolInputText}}"
+          ></textarea>
+          <button class="tool-paste-pill" bindtap="onPasteToTool">粘贴</button>
+        </view>
+
+        <!-- Result for 'clean' -->
+        <view class="tool-result-panel" wx:if="{{activeToolType === 'clean' && toolResultText}}">
+          <view class="panel-header">
+            <text class="panel-title">处理后文案</text>
+            <text class="panel-stats">{{toolStats}}</text>
+          </view>
+          <view class="panel-content" user-select="true">{{toolResultText}}</view>
+        </view>
+
+        <!-- Result for 'font' -->
+        <view class="tool-result-panel font-panel" wx:if="{{activeToolType === 'font' && fontVariants.length > 0}}">
+          <view class="panel-header">
+            <text class="panel-title">点击一键复制花样样式</text>
+          </view>
+          <view class="font-variants-list">
+            <view
+              class="font-item-row"
+              wx:for="{{fontVariants}}"
+              wx:key="name"
+              bindtap="onCopyText"
+              data-text="{{item.text}}"
+            >
+              <text class="font-item-name">{{item.name}}</text>
+              <text class="font-item-preview">{{item.text}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- Result for 'check' -->
+        <view class="tool-result-panel" wx:if="{{activeToolType === 'check' && toolInputText}}">
+          <view class="panel-header">
+            <text class="panel-title">违禁词排查结果</text>
+          </view>
+          <view class="check-result-box">
+            <block wx:if="{{sensitiveHits.length > 0}}">
+              <text class="warning-text">⚠️ 发现疑似极限词/敏感词：</text>
+              <view class="hits-tag-row">
+                <text class="hit-tag" wx:for="{{sensitiveHits}}" wx:key="*this">{{item}}</text>
+              </view>
+              <text class="check-tip">建议自媒体发布前替换上述词汇，避免违规或被限流。</text>
+            </block>
+            <block wx:else>
+              <text class="safe-text">✅ 未发现常见广告法极限词，表述合规！</text>
+            </block>
+          </view>
+        </view>
+      </view>
+
+      <!-- Modal Footer -->
+      <view class="tool-modal-footer">
+        <button class="tool-action-btn secondary" bindtap="onCopyToolResult" wx:if="{{activeToolType === 'clean' && toolResultText}}">
+          复制结果
+        </button>
+        <button class="tool-action-btn primary" bindtap="onApplyToolToPolish">
+          带入润色工坊 ✨
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- Include Shared TabBar -->
+  <include src="../../templates/tabbar.wxml" />
+</view>

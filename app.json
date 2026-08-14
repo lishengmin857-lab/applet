@@ -1,15 +1,21 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/home/home",
     "pages/videoparse/videoparse",
-    "pages/profile/profile"
+    "pages/polish/polish",
+    "pages/profile/profile",
+    "pages/records/records",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F5F0EA",
-    "navigationBarTitleText": "文案润色",
+    "navigationBarTitleText": "文案灵感与创作工具",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#F5F0EA"
+  },
+  "networkTimeout": {
+    "downloadFile": 600000
   },
   "sitemapLocation": "sitemap.json"
 }
